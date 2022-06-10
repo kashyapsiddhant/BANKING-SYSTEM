@@ -1,0 +1,143 @@
+/*Create a structure to specify data of customers in a bank. The data to be stored is:
+Account number, Name, Balance in account. Assume maximum of 20 customers in
+the bank. Create a function to read all customers details and call it in main. Your
+program must be menu driven with following options
+1. Print the Account number and name and balance of each customer.
+
+2. Withdraw money
+
+3. Deposit money
+4. Search Customer*/
+
+#include <stdio.h>
+#include <string.h>
+struct acc_det
+{
+    long acc_no;
+    char name[10];
+    int bal;
+}s[20];
+void cust_det(int x)
+{
+    for(int j=0;j<x;j++)
+    {
+       printf("Enter Account number, Name, Balance in account of %d customer\n",(j+1));
+       scanf("%ld\n%s\n%d",&s[j].acc_no,&s[j].name,&s[j].bal);
+    }
+      
+    }
+
+int main()
+{
+    int cout,i,c,x,y,res=0;
+    long an,ano;
+    char naam[10];
+    printf("Enter number of customers\n");
+    scanf("%d",&cout);
+    cust_det(cout);
+    printf("1. Print the Account number and name and balance of each customer.\n2. Withdraw money\n3. Deposit money\n4. Search Customer\nEnter your choice\n");
+    
+    scanf("%d",&c);
+    switch(c)
+    {
+        case 1:printf("Customers Account numbers,names,balances\n");
+        for(int j=0;j<3;j++)
+    {
+       printf("Account number, Name, Balance in account of %d customer\n",(j+1));
+       printf("%ld %s %d\n",s[j].acc_no,s[j].name,s[j].bal);
+    }
+        break;
+        case 2: printf("Enter money to withdraw along with your account number\n");
+        scanf("%d\n%ld",&x,&an);
+        for(i=0;i<3;i++)
+        {
+            if(s[i].acc_no==an)
+            {
+                if(x>s[i].bal)
+                printf("INSUFFICIENT BAL..");
+                else
+                {
+                     printf("ACCOUNT NUMBER %ld\nACCOUNT HOLDER's NAME %s\n",s[i].acc_no,s[i].name);
+                printf("DEBITED MONEY IS %d\nAMOUNT LEFT IN BANK %d\n",x,((s[i].bal)-x));
+                }
+            }
+        }
+        break;
+        case 3:printf("Enter money to deposit along with your account number\n");
+        scanf("%d\n%ld",&y,&ano);
+        for(i=0;i<3;i++)
+        {
+            if(s[i].acc_no==ano)
+            {
+                printf("ACCOUNT NUMBER %ld\nAND ACCOUNT HOLDER's NAME %s\n",s[i].acc_no,s[i].name);
+                 printf("CREDITED MONEY IS %d\nAMOUNT IN BANK %d",x,((s[i].bal)+y));
+            }
+            else
+            break;
+        }
+        break;
+        case 4:printf("Enter name to search\n");
+              scanf("%s",&naam);
+              for(i=0;i<cout;i++)
+              {
+                 res=strcmp(s[i].name,naam);
+              }
+              if(res==0)
+              printf("%s is present in the search",naam);
+              break;
+              default: printf("INVALID INPUT");
+    }
+        
+                
+     return 0;   
+    }
+    
+    
+    OUTPUTS:
+Enter number of customers
+3
+Enter Account number, Name, Balance in account of 1 customer
+456798234 Siddhant 45000
+Enter Account number, Name, Balance in account of 2 customer
+348922347 Abhishek 56000
+Enter Account number, Name, Balance in account of 3 customer
+227893007 Suryasen 98000
+1. Print the Account number and name and balance of each customer.
+2. Withdraw money
+3. Deposit money
+4. Search Customer
+Enter your choice
+1
+Customers Account numbers,names,balances
+Account number, Name, Balance in account of 1 customer
+456798234 Siddhant 45000
+Account number, Name, Balance in account of 2 customer
+348922347 Abhishek 56000
+Account number, Name, Balance in account of 3 customer
+227893007 Suryasen 98000
+
+
+Enter your choice
+2
+Enter money to withdraw along with your account number
+20000 227893007
+ACCOUNT NUMBER 227893007
+ACCOUNT HOLDER's NAME Suryasen
+DEBITED MONEY IS 20000
+AMOUNT LEFT IN BANK 78000
+
+Enter your choice
+3
+Enter money to deposit along with your account number
+2300 456798234
+ACCOUNT NUMBER 456798234
+AND ACCOUNT HOLDER's NAME Siddhant
+CREDITED MONEY IS 32765
+AMOUNT IN BANK 47300
+
+Enter your choice
+4
+Enter name to search
+Siddhant
+Siddhant is present in the search
+
